@@ -34,4 +34,30 @@ document.addEventListener('DOMContentLoaded', () => {
       label.style.outline = checkbox.checked ? '5px solid red' : 'none'
     })
   })
+
+  const isInViewport = element => {
+    const rect = element.getBoundingClientRect()
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    )
+  }
+
+  const lazyLoadImages = () => {
+    document.querySelectorAll('.image-label').forEach(label => {
+      if (isInViewport(label)) {
+        const imgUrl = label.parentElement.getAttribute('data-img')
+        if (imgUrl && !label.style.backgroundImage) {
+          label.style.backgroundImage = `url('${imgUrl}')`
+        }
+      }
+    })
+  }
+
+  lazyLoadImages()
+
+  window.addEventListener('scroll', lazyLoadImages)
 })
