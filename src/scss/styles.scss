@@ -1,0 +1,112 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+.image-container {
+  position: relative;
+  height: 330px;
+  width: 330px;
+  margin: 1rem auto;
+  border: 10px solid white;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .image-label {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: transparent;
+      z-index: 2;
+    }
+
+    &::before {
+      top: 5px;
+      left: 5px;
+      border-top: 1px solid red;
+      border-left: 1px solid red;
+    }
+
+    &::after {
+      top: 5px;
+      right: 272px;
+      border-top: 1px solid red;
+      border-right: 1px solid red;
+    }
+
+    .bottom-left-corner,
+    .bottom-right-corner {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: transparent;
+      z-index: 2;
+    }
+
+    .bottom-left-corner {
+      bottom: 272px;
+      left: 5px;
+      border-bottom: 1px solid red;
+      border-left: 1px solid red;
+    }
+
+    .bottom-right-corner {
+      bottom: 272px;
+      right: 272px;
+      border-bottom: 1px solid red;
+      border-right: 1px solid red;
+    }
+  }
+  .image-checkbox {
+    display: none;
+
+    &:checked + .image-label .checkbox-corner {
+      display: block;
+    }
+  }
+}
+
+// Responsive padding
+.row {
+  @media (max-width: 576px) {
+    .col-12 {
+      padding: 0.5rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .col-md-6 {
+      padding: 0.5rem;
+    }
+  }
+  @media (min-width: 992px) {
+    .col-lg-3 {
+      padding: 0.5rem;
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .bottom-left-corner {
+    bottom: 290px !important;
+    left: 5px;
+  }
+
+  .bottom-right-corner {
+    bottom: 290px !important;
+    right: 265px !important;
+  }
+
+  .image-label::after {
+    top: 5px;
+    right: 265px !important;
+  }
+}
